@@ -8,6 +8,8 @@ import vuetify from './plugins/vuetify';
 import axios from "axios";
 import VueAxios from "vue-axios";
 
+import './assets/main.css'
+
 Vue.use(VueRouter)
 Vue.use(VueAxios, axios);
 
