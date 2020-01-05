@@ -4,16 +4,19 @@
 			<navbar />
 			<router-view />
 		</v-content>
+		<snackbar />
 	</v-app>
 </template>
 
 <script>
-import Navbar from "@/components/Navbar"
+import Navbar from "@/components/utils/Navbar"
+import Snackbar from "@/components/utils/Snackbar"
 
 export default {
 	name: "App",
 	components: {
-		navbar: Navbar
+		navbar: Navbar,
+		snackbar: Snackbar
 	},
 	data: () => ({
 		//

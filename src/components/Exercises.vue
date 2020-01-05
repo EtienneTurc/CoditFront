@@ -46,11 +46,8 @@ export default {
 				for (let index = 0; index < res.data.length; index += 3) {
 					this.exercices_todo.push(res.data.slice(index, index + 3))
 				}
-				this.exercices_todo[1].push(res.data[0])
-				console.log(this.exercices_todo)
-				console.log(res)
 			} catch (error) {
-				console.log(error)
+				utils.handle(this, error)
 			}
 		}
 	}

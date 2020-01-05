@@ -4,6 +4,7 @@ import Home from "@/components/Home";
 import Exercise from "@/components/Exercise";
 import Exercises from "@/components/Exercises";
 import AddExercise from "@/components/AddExercise";
+import UpdateExercise from "@/components/UpdateExercise";
 
 const router = new VueRouter({
 	routes: [
@@ -26,6 +27,11 @@ const router = new VueRouter({
 			path: '/addExercise',
 			name: 'addExercise',
 			component: AddExercise
+		},
+		{
+			path: '/updateExercise/:id',
+			name: 'updateExercise',
+			component: UpdateExercise
 		},
 	],
 	mode: "history"

@@ -14,7 +14,6 @@
 						label="Sujet en markdown"
 						required
 					></v-textarea>
-
 					<v-file-input @change="saveTestFile" accept=".py" label="Fichier de test"></v-file-input>
 					<v-row>
 						<v-col md="6">
@@ -25,7 +24,7 @@
 						</v-col>
 					</v-row>
 					<v-switch v-model="exercise.showTitle" label="Afficher le titre"></v-switch>
-					<v-btn @click="postExercise">Soumettre</v-btn>
+					<v-btn @click="updateExercise">Soumettre</v-btn>
 				</v-form>
 			</v-col>
 			<v-col md="6">
@@ -49,13 +48,36 @@ export default {
 	computed: {
 		html: function() {
 			return marked(this.exercise.markdown || "")
+		},
+		fileName: function() {
+			if (this.testFile) {
+				return this.testFile
+			}
+			if (this.exercise.testPath) {
+				let pathSplit = this.exercise.testPath.split("/")
+				return pathSplit[pathSplit.length - 1]
+			}
+			return ""
 		}
+	},
+	created() {
+		this.getExercise()
 	},
 	methods: {
 		saveTestFile(file) {
 			this.testFile = file
 		},
-		async postExercise() {
+		async getExercise() {
+			let res = await this.$http.get(
+				process.env.VUE_APP_API_URL +
+					"/exercise?id=" +
+					this.$route.params.id
+			)
+			this.exercise = res.data
+			this.exercise.html = marked(this.exercise.markdown)
+			this.exercise.banner = utils.defaultBanner(this.exercise.banner)
+		},
+		async updateExercise() {
 			if (!this.testFile) {
 				this.$alert.$emit("snackbar", {
 					message: "Erreur : No file uploaded",
@@ -64,15 +86,11 @@ export default {
 				return
 			}
 
-			if (!this.banner) {
-				this.exercise.banner = utils.defaultBanner()
-			}
-
 			let data = new FormData()
 			data.append("testFile", this.testFile)
 			data.append("exercise", JSON.stringify(this.exercise))
 			try {
-				let res = await this.$http.post(
+				let res = await this.$http.put(
 					process.env.VUE_APP_API_URL + "/exercise",
 					data
 				)

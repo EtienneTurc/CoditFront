@@ -9,9 +9,23 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 
 import './assets/main.css'
+import './assets/loader.css'
 
 Vue.use(VueRouter)
 Vue.use(VueAxios, axios);
+
+axios.defaults.withCredentials = true
+
+axios.interceptors.response.use(function (response) {
+	return response;
+}, function (error) {
+	if (error.response.status == 401) {
+		router.replace("/")
+	}
+	return Promise.reject(error);
+});
+
+Vue.prototype.$alert = new Vue()
 
 // Vue.config.productionTip = false
 
