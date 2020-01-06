@@ -1,6 +1,7 @@
 import VueRouter from 'vue-router'
 
 import Home from "@/components/Home";
+import Login from "@/components/Login";
 import Exercise from "@/components/Exercise";
 import Exercises from "@/components/Exercises";
 import AddExercise from "@/components/AddExercise";
@@ -14,6 +15,11 @@ const router = new VueRouter({
 			component: Home
 		},
 		{
+			path: "/login",
+			name: "login",
+			component: Login
+		},
+		{
 			path: '/exercises',
 			name: 'exercises',
 			component: Exercises
@@ -21,7 +27,7 @@ const router = new VueRouter({
 		{
 			path: '/exercise/:id',
 			name: 'exercise',
-			component: Exercise
+			component: Exercise,
 		},
 		{
 			path: '/addExercise',

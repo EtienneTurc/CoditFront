@@ -1,6 +1,6 @@
 <template>
 	<v-container>
-		<h1>Ajouter un nouvel exercice</h1>
+		<h2>Ajouter un nouvel exercice</h2>
 		<v-row>
 			<v-col md="6">
 				<v-form>
@@ -14,6 +14,12 @@
 						label="Sujet en markdown"
 						required
 					></v-textarea>
+					<v-text-field
+						type="number"
+						:rules="[v => v>= 1 && v<=5 ]"
+						v-model="exercise.difficulty"
+						label="Difficulté (1 -> 5)"
+					></v-text-field>
 
 					<v-file-input @change="saveTestFile" accept=".py" label="Fichier de test"></v-file-input>
 					<v-row>
@@ -25,6 +31,7 @@
 						</v-col>
 					</v-row>
 					<v-switch v-model="exercise.showTitle" label="Afficher le titre"></v-switch>
+					<v-file-input @change="saveBanner" accept="image/*" label="Banner"></v-file-input>
 					<v-btn @click="postExercise">Soumettre</v-btn>
 				</v-form>
 			</v-col>
@@ -55,6 +62,9 @@ export default {
 		saveTestFile(file) {
 			this.testFile = file
 		},
+		saveBanner(file) {
+			this.banner = file
+		},
 		async postExercise() {
 			if (!this.testFile) {
 				this.$alert.$emit("snackbar", {
@@ -64,11 +74,10 @@ export default {
 				return
 			}
 
-			if (!this.banner) {
-				this.exercise.banner = utils.defaultBanner()
-			}
-
 			let data = new FormData()
+			if (this.banner) {
+				data.append("banner", this.banner)
+			}
 			data.append("testFile", this.testFile)
 			data.append("exercise", JSON.stringify(this.exercise))
 			try {

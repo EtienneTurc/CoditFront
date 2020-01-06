@@ -1,7 +1,7 @@
 <template>
 	<v-app>
 		<v-content>
-			<navbar />
+			<navbar v-if="this.$route.name != 'login'"></navbar>
 			<router-view />
 		</v-content>
 		<snackbar />
@@ -18,8 +18,33 @@ export default {
 		navbar: Navbar,
 		snackbar: Snackbar
 	},
-	data: () => ({
-		//
-	})
+	data() {
+		return {}
+	},
+	created() {}
 }
 </script>
+
+<style scoped>
+.zoom-enter-active,
+.zoom-leave-active {
+	animation-duration: 0.5s;
+	animation-fill-mode: both;
+	animation-name: zoom;
+}
+
+.zoom-leave-active {
+	animation-direction: reverse;
+}
+
+@keyframes zoom {
+	from {
+		opacity: 0;
+		transform: scale3d(1.5, 1.5, 1.5);
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+</style>

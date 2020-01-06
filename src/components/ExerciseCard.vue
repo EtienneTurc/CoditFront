@@ -1,10 +1,16 @@
 <template>
-	<v-card @click="navigation()" class="mx-auto">
+	<v-card @click="navigation" class="mx-auto">
 		<v-list-item>
 			<v-list-item-content>
-				<v-list-item-title class="headline">{{exercise.title}}</v-list-item-title>
+				<v-list-item-title class="headline">
+					<div class="flex-between">
+						{{exercise.title}}
+						<div>
+							<v-icon v-for="(exo,i) in exercise.difficulty" :key="i" style="color:yellow">mdi-star</v-icon>
+						</div>
+					</div>
+				</v-list-item-title>
 				<v-list-item-subtitle>{{exercise.language}}</v-list-item-subtitle>
-				<v-list-item-subtitle>Diffuclty</v-list-item-subtitle>
 			</v-list-item-content>
 		</v-list-item>
 
@@ -13,8 +19,13 @@
 </template>
 
 <script>
+import utils from "@/utils/utils"
+
 export default {
 	props: ["exercise"],
+	data() {
+		return {}
+	},
 	methods: {
 		navigation() {
 			this.$router.push({
@@ -23,14 +34,52 @@ export default {
 		}
 	},
 	created() {
-		if (!this.exercise.banner) {
-			this.exercise.banner =
-				process.env.VUE_APP_API_URL_MEDIA +
-				`/default_banner_${parseInt(Math.random() * 11) + 1}.jpg`
-		}
+		this.exercise.banner = utils.getBanner(this.exercise.banner)
 	}
 }
 </script>
 
-<style>
+<style scoped>
+.flex-between {
+	display: flex;
+	justify-content: space-between;
+}
+
+.zoom-in,
+.zoom-out {
+	animation-duration: 0.5s;
+	animation-fill-mode: both;
+	animation-name: zoom;
+}
+
+.zoom-out {
+	animation-direction: reverse;
+}
+
+@keyframes zoom {
+	from {
+		opacity: 1;
+	}
+
+	100% {
+		transform: scale3d(2, 2, 2);
+		opacity: 1;
+	}
+}
+
+.fade-out {
+	animation-duration: 0.5s;
+	animation-fill-mode: both;
+	animation-name: fade-out;
+}
+
+@keyframes fade-out {
+	from {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
 </style>

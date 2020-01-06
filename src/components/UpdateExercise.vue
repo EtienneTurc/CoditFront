@@ -1,6 +1,5 @@
 <template>
 	<v-container>
-		<h1>Ajouter un nouvel exercice</h1>
 		<v-row>
 			<v-col md="6">
 				<v-form>
@@ -14,6 +13,13 @@
 						label="Sujet en markdown"
 						required
 					></v-textarea>
+					<v-text-field
+						type="number"
+						:rules="[v => v>= 1 && v<=5 ]"
+						v-model="exercise.difficulty"
+						label="Difficulté (1 -> 5)"
+					></v-text-field>
+
 					<v-file-input @change="saveTestFile" accept=".py" label="Fichier de test"></v-file-input>
 					<v-row>
 						<v-col md="6">
@@ -24,6 +30,7 @@
 						</v-col>
 					</v-row>
 					<v-switch v-model="exercise.showTitle" label="Afficher le titre"></v-switch>
+					<v-file-input @change="saveBanner" accept="image/*" label="Banner"></v-file-input>
 					<v-btn @click="updateExercise">Soumettre</v-btn>
 				</v-form>
 			</v-col>
@@ -67,6 +74,9 @@ export default {
 		saveTestFile(file) {
 			this.testFile = file
 		},
+		saveBanner(file) {
+			this.banner = file
+		},
 		async getExercise() {
 			let res = await this.$http.get(
 				process.env.VUE_APP_API_URL +
@@ -75,19 +85,15 @@ export default {
 			)
 			this.exercise = res.data
 			this.exercise.html = marked(this.exercise.markdown)
-			this.exercise.banner = utils.defaultBanner(this.exercise.banner)
 		},
 		async updateExercise() {
-			if (!this.testFile) {
-				this.$alert.$emit("snackbar", {
-					message: "Erreur : No file uploaded",
-					status: "error"
-				})
-				return
-			}
-
 			let data = new FormData()
-			data.append("testFile", this.testFile)
+			if (this.banner) {
+				data.append("banner", this.banner)
+			}
+			if (this.testFile) {
+				data.append("testFile", this.testFile)
+			}
 			data.append("exercise", JSON.stringify(this.exercise))
 			try {
 				let res = await this.$http.put(

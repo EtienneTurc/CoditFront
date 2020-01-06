@@ -1,27 +1,28 @@
 <template>
-	<v-row class="navbar">
-		<v-col cols="5">
-			<v-row justify="space-around">
-				<a @click="navigation('home')">
-					<span class="app-name">Submission platform</span>
-				</a>
-			</v-row>
-		</v-col>
-		<v-col cols="6" class="menu-item">
-			<v-row justify="space-between">
-				<v-btn
-					text
-					class="white--text"
-					v-if="user.isAdmin"
-					@click="navigation('/addExercise')"
-				>Nouveau problème</v-btn>
-				<v-btn text class="white--text" @click="navigation('/exercises')">Problèmes</v-btn>
-				<span class="menu-item">{{user.firstName}} {{user.lastName}}</span>
-				<v-btn color="primary" @click="logout" class="log-out white--text">Log out</v-btn>
-			</v-row>
-		</v-col>
+	<v-toolbar class="navbar">
+		<v-toolbar-title class="title white--text">Submission platform</v-toolbar-title>
+
 		<v-spacer></v-spacer>
-	</v-row>
+
+		<v-toolbar-items>
+			<v-btn
+				text
+				class="white--text"
+				v-if="user.isAdmin"
+				@click="navigation('/addExercise')"
+			>Nouveau problème</v-btn>
+			<v-btn text class="white--text" @click="navigation('/exercises')">Problèmes</v-btn>
+			<v-btn text disabled style="color:white !important">
+				<v-icon style="color:white !important">mdi-account</v-icon>
+				{{user.firstName}}
+				<br />
+				{{user.lastName}}
+			</v-btn>
+			<v-btn @click="logout" text class="log-out white--text">
+				<v-icon>mdi-logout</v-icon>Déconnexion
+			</v-btn>
+		</v-toolbar-items>
+	</v-toolbar>
 </template>
 
 <script>
@@ -39,7 +40,7 @@ export default {
 		logout() {
 			window.location.href =
 				process.env.VUE_APP_API_URL +
-				`/logout?next=${process.env.VUE_APP_URL}`
+				`/logout?next=${process.env.VUE_APP_URL}/login`
 		},
 		async getUserInfo() {
 			try {
@@ -59,8 +60,11 @@ export default {
 </script>
 
 <style lang="scss">
+.title {
+	font-size: 1.5rem !important;
+}
 .navbar {
-	background-color: blue;
+	background-color: blue !important;
 }
 .app-name {
 	font-size: 2rem;

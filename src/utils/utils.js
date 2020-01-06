@@ -1,9 +1,11 @@
 
-exports.defaultBanner = banner => {
+exports.getBanner = banner => {
 	if (!banner) {
 		banner =
 			process.env.VUE_APP_API_URL_MEDIA +
 			`/default_banner_${parseInt(Math.random() * 11) + 1}.jpg`
+	} else {
+		banner = process.env.VUE_APP_API_URL_MEDIA + banner
 	}
 	return banner
 }
