@@ -27,3 +27,25 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+Codeasy
+Codastic
+Codis
+Codesome
+Codeful
+SkyCode
+CodeRock
+Codex
+StuntCode
+CodeRise
+Codivine
+CodeDivine
+Coderful
+Codit
+RoyalCode
+Codobvious
+SmoothCode
+CodeChill
+Codesnap
+Satiscode
+JustCodeIt

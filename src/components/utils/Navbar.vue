@@ -64,7 +64,7 @@ export default {
 	font-size: 1.5rem !important;
 }
 .navbar {
-	background-color: blue !important;
+	background-color: #0984e3 !important;
 }
 .app-name {
 	font-size: 2rem;

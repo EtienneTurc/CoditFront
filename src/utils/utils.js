@@ -23,3 +23,37 @@ exports.handle = (ctx, err) => {
 		status: "error",
 	})
 }
+
+exports.format = std => {
+	std = std.split("\n\n").join("\n")
+	if (!std.split("\n")[0]) {
+		std = std.replace("\n", "")
+	}
+	std = std.split("\n")
+	for (let index = 0; index < std.length; index++) {
+		if (std[index].startsWith("<SUCCESS>")) {
+			if (std[index].trim().endsWith(":"))
+				std[index] = std[index].trim().slice(0, -1)
+			std[index] = `<span class="success-color">${
+				std[index]
+				}</span>`
+		} else if (std[index].startsWith("<FAILURE>")) {
+			std[index] = `<span class="failure-color">${
+				std[index]
+				}</span>`
+		}
+	}
+	std = std.join("<br>")
+	std = std
+		.split("<SUCCESS>")
+		.join(
+			"<i class='v-icon mdi mdi-check theme--light success-color'></i>"
+		)
+	std = std
+		.split("<FAILURE>")
+		.join(
+			"<i class='v-icon mdi mdi-close-circle theme--light failure-color'></i>"
+		)
+
+	return std
+}

@@ -2,7 +2,7 @@
 	<v-container>
 		<v-row align="center" justify="space-between">
 			<h2>À faire</h2>
-			<div class="subtitle">{{todo.length}}/{{done.length + todo.length}}</div>
+			<div class="subtitle">{{todoLength}}/{{doneLength + todoLength}}</div>
 		</v-row>
 		<v-row align="center" justify="start" v-for="(exos, index) in todo" :key="'todo' + index">
 			<v-col align-self="start" md="4" v-for="exo in exos" :key="exo._id">
@@ -13,7 +13,7 @@
 
 		<v-row align="center" justify="space-between">
 			<h2>Réussi</h2>
-			<div class="subtitle">{{done.length}}/{{done.length + todo.length}}</div>
+			<div class="subtitle">{{doneLength}}/{{doneLength + todoLength}}</div>
 		</v-row>
 		<v-row v-for="(exos, index) in done" :key="'done' + index">
 			<v-col v-for="exo in exos" md="4" :key="exo._id">
@@ -47,10 +47,12 @@ export default {
 					process.env.VUE_APP_API_URL + "/exercises"
 				)
 				this.todo = []
+				this.todoLength = res.data.todo.length
 				for (let index = 0; index < res.data.todo.length; index += 3) {
 					this.todo.push(res.data.todo.slice(index, index + 3))
 				}
 
+				this.doneLength = res.data.done.length
 				this.done = []
 				for (let index = 0; index < res.data.done.length; index += 3) {
 					this.done.push(res.data.done.slice(index, index + 3))

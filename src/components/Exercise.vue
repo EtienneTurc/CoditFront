@@ -4,7 +4,7 @@
 		<v-row>
 			<v-col md="6">
 				<v-card class="pa-5">
-					<v-img class="baorder-radius-inherit mb-2" :src="exercise.banner" height="170"></v-img>
+					<v-img class="border-radius-inherit mb-2" :src="exercise.banner" height="170"></v-img>
 					<div v-html="exercise.html"></div>
 				</v-card>
 			</v-col>
@@ -30,7 +30,6 @@
 					<h3>Résultats:</h3>
 					<loader v-if="loading" />
 					<div v-if="!stdout && !stderr">Uploader un fichier !</div>
-					<div v-html="stdout"></div>
 					<div v-html="stderr"></div>
 				</v-card>
 			</v-col>
@@ -82,13 +81,11 @@ export default {
 				}
 			)
 			this.loading = false
-			this.stdout = res.data.user_stdout.split("\n").join("<br>")
-			this.stderr = res.data.user_stderr.split("\n").join("<br>")
-			this.stdout = marked(this.stdout || "")
-			this.stderr = marked(this.stderr || "")
-			this.exercise.success = res.data.success
-			if (this.exercise.success) this.color = "color-success"
-			else this.color = "color-failure"
+			this.stdout = utils.format(res.data.user_stdout || "")
+			this.stderr = utils.format(res.data.user_stderr || "")
+			this.success = res.data.success
+			if (this.success) this.color = "success-backgournd-color"
+			else this.color = "failure-background-color"
 		}
 	},
 	created() {
@@ -102,7 +99,7 @@ export default {
 	cursor: default !important;
 }
 
-.baorder-radius-inherit {
+.border-radius-inherit {
 	border-radius: inherit;
 }
 
@@ -110,11 +107,19 @@ export default {
 	padding-bottom: 0px !important;
 }
 
-.color-success {
+.success-backgournd-color {
 	background-color: rgba(76, 175, 80, 0.2) !important;
 }
 
-.color-failure {
+.failure-background-color {
 	background-color: rgba(246, 80, 81, 0.2) !important;
+}
+
+.success-color {
+	color: #4caf50 !important;
+}
+
+.failure-color {
+	color: rgba(246, 80, 81) !important;
 }
 </style>
