@@ -24,7 +24,14 @@
 						<v-icon>mdi-check</v-icon>
 					</v-btn>
 					<v-card-title>Tester ici votre code !</v-card-title>
-					<v-file-input class="mr-5 ml-5" label="Votre code" dense @change="submitFile" accept=".py"></v-file-input>
+					<v-file-input
+						class="mr-5 ml-5"
+						label="Votre code"
+						dense
+						ref="file"
+						@change="submitFile"
+						accept=".py"
+					></v-file-input>
 				</v-card>
 				<v-card class="pa-5 mt-5" :class="color">
 					<h3>Résultats:</h3>
@@ -50,7 +57,8 @@ export default {
 			loading: false,
 			stdout: "",
 			stderr: "",
-			color: ""
+			color: "",
+			file: null
 		}
 	},
 	components: {
@@ -67,8 +75,11 @@ export default {
 			this.exercise.banner = utils.getBanner(this.exercise.banner)
 		},
 		async submitFile(file) {
-			// let file = (e.target.files || e.dataTransfer.files)[0]
+			if (!file) return
 			this.loading = true
+			this.stdout = ""
+			this.stderr = ""
+			this.color = ""
 			let data = new FormData()
 
 			data.append("submission", file)
@@ -84,8 +95,13 @@ export default {
 			this.stdout = utils.format(res.data.user_stdout || "")
 			this.stderr = utils.format(res.data.user_stderr || "")
 			this.success = res.data.success
-			if (this.success) this.color = "success-backgournd-color"
+			if (this.success) this.color = "success-background-color"
 			else this.color = "failure-background-color"
+
+			// Trick to allow the same file to be reupload
+			let text = this.$refs.file.text[0]
+			this.$refs.file.$children[2].$el.click()
+			this.$refs.file.text[0] = text
 		}
 	},
 	created() {
@@ -107,7 +123,7 @@ export default {
 	padding-bottom: 0px !important;
 }
 
-.success-backgournd-color {
+.success-background-color {
 	background-color: rgba(76, 175, 80, 0.2) !important;
 }
 

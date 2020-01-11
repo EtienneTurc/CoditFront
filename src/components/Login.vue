@@ -5,7 +5,7 @@
 				<!-- <v-img class="my-3" contain height="200px"></v-img> -->
 
 				<h1 class="font-weight-light display-3 white--text">
-					Submission platform
+					Codit
 					<sup style="font-size:0.4em; top: -1.2em;">1.0</sup>
 				</h1>
 

@@ -1,6 +1,6 @@
 <template>
 	<v-toolbar class="navbar">
-		<v-toolbar-title class="title white--text">Submission platform</v-toolbar-title>
+		<v-toolbar-title class="title white--text">Codit</v-toolbar-title>
 
 		<v-spacer></v-spacer>
 
