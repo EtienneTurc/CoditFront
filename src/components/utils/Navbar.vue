@@ -9,6 +9,12 @@
 				text
 				class="white--text"
 				v-if="user.isAdmin"
+				@click="navigation('/addGroup')"
+			>Nouveau Groupe</v-btn>
+			<v-btn
+				text
+				class="white--text"
+				v-if="user.isAdmin"
 				@click="navigation('/addExercise')"
 			>Nouveau problème</v-btn>
 			<v-btn text class="white--text" @click="navigation('/exercises')">Problèmes</v-btn>

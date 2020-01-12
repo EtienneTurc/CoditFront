@@ -5,7 +5,17 @@
 			<v-col md="6">
 				<v-form>
 					<v-text-field autofocus v-model="exercise.title" label="Titre"></v-text-field>
-					<v-select hide-details dense v-model="exercise.language" :items="languages" label="Langage"></v-select>
+					<v-select
+						hide-details
+						dense
+						multiple
+						item-text="title"
+						item-value="_id"
+						v-model="exercise.groups"
+						:items="groups"
+						label="Groupes"
+					></v-select>
+					<v-select hide-details v-model="exercise.language" :items="languages" label="Langage"></v-select>
 
 					<v-textarea
 						auto-grow
@@ -32,7 +42,7 @@
 					</v-row>
 					<v-switch v-model="exercise.showTitle" label="Afficher le titre"></v-switch>
 					<v-file-input @change="saveBanner" accept="image/*" label="Banner"></v-file-input>
-					<v-btn @click="postExercise">Soumettre</v-btn>
+					<v-btn @click="postExercise" class="primary">Soumettre</v-btn>
 				</v-form>
 			</v-col>
 			<v-col md="6">
@@ -50,7 +60,8 @@ export default {
 	data: () => {
 		return {
 			exercise: { uploaderMail: "etienne.turc@ensta-paris.fr" },
-			languages: ["Python3"]
+			languages: ["Python3"],
+			groups: []
 		}
 	},
 	computed: {
@@ -58,12 +69,21 @@ export default {
 			return marked(this.exercise.markdown || "")
 		}
 	},
+	created() {
+		this.getGroups()
+	},
 	methods: {
 		saveTestFile(file) {
 			this.testFile = file
 		},
 		saveBanner(file) {
 			this.banner = file
+		},
+		async getGroups() {
+			let res = await this.$http.get(
+				process.env.VUE_APP_API_URL + "/groups"
+			)
+			this.groups = res.data
 		},
 		async postExercise() {
 			if (!this.testFile) {

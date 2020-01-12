@@ -4,6 +4,16 @@
 			<v-col md="6">
 				<v-form>
 					<v-text-field autofocus v-model="exercise.title" label="Titre"></v-text-field>
+					<v-select
+						hide-details
+						dense
+						multiple
+						item-text="title"
+						item-value="_id"
+						v-model="exercise.groups"
+						:items="groups"
+						label="Groupes"
+					></v-select>
 					<v-select hide-details dense v-model="exercise.language" :items="languages" label="Langage"></v-select>
 
 					<v-textarea
@@ -69,6 +79,7 @@ export default {
 	},
 	created() {
 		this.getExercise()
+		this.getGroups()
 	},
 	methods: {
 		saveTestFile(file) {
@@ -85,6 +96,12 @@ export default {
 			)
 			this.exercise = res.data
 			this.exercise.html = marked(this.exercise.markdown)
+		},
+		async getGroups() {
+			let res = await this.$http.get(
+				process.env.VUE_APP_API_URL + "/groups"
+			)
+			this.groups = res.data
 		},
 		async updateExercise() {
 			let data = new FormData()
