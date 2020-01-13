@@ -24,6 +24,13 @@ exports.handle = (ctx, err) => {
 	})
 }
 
+exports.truncate = (str, linesLimit, sizeLimit) => {
+	let strLineCut = str.split("\n", linesLimit).join("\n")
+	if (strLineCut.length == str.length && str.length < sizeLimit)
+		return str
+	return strLineCut.slice(0, sizeLimit) + "..."
+}
+
 exports.format = std => {
 	std = std.split("\n\n").join("\n")
 	if (!std.split("\n")[0]) {

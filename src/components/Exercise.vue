@@ -36,7 +36,7 @@
 				<v-card class="pa-5 mt-5" :class="color">
 					<h3>Résultats:</h3>
 					<loader v-if="loading" />
-					<div v-if="!stdout && !stderr">Uploader un fichier !</div>
+					<div v-if="!stdout && !stderr && !loading">Uploader un fichier !</div>
 					<div v-html="stderr"></div>
 				</v-card>
 			</v-col>
@@ -58,11 +58,15 @@ export default {
 			stdout: "",
 			stderr: "",
 			color: "",
-			file: null
+			file: null,
+			success: false
 		}
 	},
 	components: {
 		loader: Loader
+	},
+	created() {
+		this.getExercise()
 	},
 	methods: {
 		async getExercise() {
@@ -103,9 +107,6 @@ export default {
 			this.$refs.file.$children[2].$el.click()
 			this.$refs.file.text[0] = text
 		}
-	},
-	created() {
-		this.getExercise()
 	}
 }
 </script>

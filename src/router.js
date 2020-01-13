@@ -4,6 +4,7 @@ import Home from "@/components/Home";
 import Login from "@/components/Login";
 import AddGroup from "@/components/AddGroup";
 import UpdateGroup from "@/components/UpdateGroup";
+import Groups from "@/components/Groups";
 import Exercise from "@/components/Exercise";
 import Exercises from "@/components/Exercises";
 import AddExercise from "@/components/AddExercise";
@@ -30,6 +31,11 @@ const router = new VueRouter({
 			path: '/updateGroup/:id',
 			name: 'updateGroup',
 			component: UpdateGroup
+		},
+		{
+			path: '/groups',
+			name: 'groups',
+			component: Groups
 		},
 		{
 			path: '/exercises',
