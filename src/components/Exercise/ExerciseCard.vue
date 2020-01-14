@@ -5,8 +5,8 @@
 				<v-list-item-title class="headline">
 					<div class="flex-between">
 						{{exercise.title}}
-						<div>
-							<v-icon v-for="(exo,i) in exercise.difficulty" :key="i" style="color:yellow">mdi-star</v-icon>
+						<div class="stars">
+							<v-icon v-for="(exo,i) in exercise.difficulty" :key="i" style="color:#f1c40f">mdi-star</v-icon>
 						</div>
 					</div>
 				</v-list-item-title>
@@ -45,41 +45,13 @@ export default {
 	justify-content: space-between;
 }
 
-.zoom-in,
-.zoom-out {
-	animation-duration: 0.5s;
-	animation-fill-mode: both;
-	animation-name: zoom;
+.difficulty {
+	color: #f1c40f;
+	vertical-align: middle;
+	font-weight: bold;
 }
 
-.zoom-out {
-	animation-direction: reverse;
-}
-
-@keyframes zoom {
-	from {
-		opacity: 1;
-	}
-
-	100% {
-		transform: scale3d(2, 2, 2);
-		opacity: 1;
-	}
-}
-
-.fade-out {
-	animation-duration: 0.5s;
-	animation-fill-mode: both;
-	animation-name: fade-out;
-}
-
-@keyframes fade-out {
-	from {
-		opacity: 1;
-	}
-
-	100% {
-		opacity: 0;
-	}
+.stars {
+	font-size: 0.8rem;
 }
 </style>

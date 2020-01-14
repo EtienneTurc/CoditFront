@@ -3,7 +3,7 @@
 		<h2>Groupes</h2>
 		<v-row align="center" justify="start" v-for="(groups, index) in groups_array" :key="index">
 			<v-col
-				align-self="start"
+				align-self="stretch"
 				md="4"
 				v-for="(group,i) in groups"
 				:key="group._id"
@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import GroupCard from "@/components/GroupCard.vue"
-import GroupCardExpansion from "@/components/GroupCardExpansion.vue"
+import GroupCard from "@/components/Group/GroupCard.vue"
+import GroupCardExpansion from "@/components/Group/GroupCardExpansion.vue"
 import utils from "@/utils/utils"
 
 export default {

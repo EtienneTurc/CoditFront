@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import ExerciseCard from "@/components/ExerciseCard.vue"
+import ExerciseCard from "@/components/Exercise/ExerciseCard.vue"
 import utils from "@/utils/utils"
 
 export default {

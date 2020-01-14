@@ -1,5 +1,5 @@
 <template>
-	<v-card @click="$emit('show')" class="mx-auto">
+	<v-card @click="$emit('show')" class="mx-auto" height="100%">
 		<v-list-item>
 			<v-list-item-content>
 				<v-list-item-title class="headline">{{group.title}}</v-list-item-title>

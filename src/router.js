@@ -2,13 +2,13 @@ import VueRouter from 'vue-router'
 
 import Home from "@/components/Home";
 import Login from "@/components/Login";
-import AddGroup from "@/components/AddGroup";
-import UpdateGroup from "@/components/UpdateGroup";
-import Groups from "@/components/Groups";
-import Exercise from "@/components/Exercise";
-import Exercises from "@/components/Exercises";
-import AddExercise from "@/components/AddExercise";
-import UpdateExercise from "@/components/UpdateExercise";
+import AddGroup from "@/components/Group/AddGroup";
+import UpdateGroup from "@/components/Group/UpdateGroup";
+import Groups from "@/components/Group/Groups";
+import Exercise from "@/components/Exercise/Exercise";
+import Exercises from "@/components/Exercise/Exercises";
+import AddExercise from "@/components/Exercise/AddExercise";
+import UpdateExercise from "@/components/Exercise/UpdateExercise";
 
 const router = new VueRouter({
 	routes: [
@@ -39,6 +39,11 @@ const router = new VueRouter({
 		},
 		{
 			path: '/exercises',
+			name: 'exercises',
+			component: Exercises
+		},
+		{
+			path: '/exercises/:id',
 			name: 'exercises',
 			component: Exercises
 		},

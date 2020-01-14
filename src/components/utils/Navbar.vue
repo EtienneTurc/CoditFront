@@ -7,24 +7,25 @@
 		<v-toolbar-items>
 			<v-btn
 				text
-				class="white--text"
+				class="separate white--text"
 				v-if="user.isAdmin"
 				@click="navigation('/addGroup')"
 			>Nouveau Groupe</v-btn>
 			<v-btn
 				text
-				class="white--text"
+				class="separate white--text"
 				v-if="user.isAdmin"
 				@click="navigation('/addExercise')"
 			>Nouveau problème</v-btn>
-			<v-btn text class="white--text" @click="navigation('/exercises')">Problèmes</v-btn>
-			<v-btn text disabled style="color:white !important">
+			<v-btn text class="separate white--text" @click="navigation('/groups')">Groupes</v-btn>
+			<v-btn text class="separate white--text" @click="navigation('/exercises')">Problèmes</v-btn>
+			<v-btn text disabled class="separate" style="color:white !important">
 				<v-icon style="color:white !important">mdi-account</v-icon>
 				{{user.firstName}}
 				<br />
 				{{user.lastName}}
 			</v-btn>
-			<v-btn @click="logout" text class="log-out white--text">
+			<v-btn @click="logout" text class="separate log-out white--text">
 				<v-icon>mdi-logout</v-icon>Déconnexion
 			</v-btn>
 		</v-toolbar-items>
@@ -88,5 +89,9 @@ export default {
 	margin-top: auto;
 	margin-bottom: auto;
 	// margin-left: 1em;
+}
+
+.separate {
+	border-left: 0.01rem solid rgb(255, 255, 255, 0.95);
 }
 </style>
