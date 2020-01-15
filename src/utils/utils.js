@@ -84,5 +84,9 @@ exports.format = (std, filename = "") => {
 		)
 	std = std.split("File \"<string>\"").join(`File ${filename}`)
 
+	if (std.includes("<br>MemoryError<br>")) {
+		std = "MemoryError"
+	}
+
 	return std
 }

@@ -9,7 +9,7 @@
 					<sup style="font-size:0.4em; top: -1.2em;">1.0</sup>
 				</h1>
 
-				<h2 class="font-italic font-weight-regular white--text mb-5">Trouvez ici</h2>
+				<h2 class="font-italic font-weight-regular white--text mb-5">Just code it !</h2>
 
 				<v-btn color="blue" depressed dark large @click="login">Connexion</v-btn>
 			</div>
