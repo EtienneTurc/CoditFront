@@ -31,7 +31,7 @@
 <script>
 import marked from "marked"
 import utils from "@/utils/utils"
-import TimePicker from "@/components/utils/TimePicker"
+import TimePicker from "@/components/Utils/TimePicker"
 
 export default {
 	data: () => {

@@ -1,7 +1,11 @@
 <template>
 	<v-container>
-		<v-row align="center" justify="space-between">
-			<h2>À faire</h2>
+		<v-row align="center" justify="space-between" class="mb-2 ml-1">
+			<h2>{{title}}</h2>
+			<go-back v-if="$route.params.id" />
+		</v-row>
+		<v-row align="center" justify="space-between" class="ml-1 mr-1">
+			<div class="title">À faire</div>
 			<div class="subtitle">{{todoLength}}/{{doneLength + todoLength}}</div>
 		</v-row>
 		<v-row align="center" justify="start" v-for="(exos, index) in todo" :key="'todo' + index">
@@ -11,8 +15,8 @@
 		</v-row>
 		<v-divider></v-divider>
 
-		<v-row align="center" justify="space-between">
-			<h2>Réussi</h2>
+		<v-row align="center" justify="space-between" class="ml-1 mr-1">
+			<div class="title">Réussi</div>
 			<div class="subtitle">{{doneLength}}/{{doneLength + todoLength}}</div>
 		</v-row>
 		<v-row v-for="(exos, index) in done" :key="'done' + index">
@@ -25,17 +29,29 @@
 
 <script>
 import ExerciseCard from "@/components/Exercise/ExerciseCard.vue"
+import GoBack from "@/components/Utils/GoBack.vue"
 import utils from "@/utils/utils"
 
 export default {
 	data: () => {
 		return {
+			todoLength: 0,
+			doneLength: 0,
 			todo: [],
-			done: []
+			done: [],
+			group: {}
+		}
+	},
+	computed: {
+		title() {
+			return this.group && this.group.title
+				? this.group.title
+				: "Tous les exercices"
 		}
 	},
 	components: {
-		"exercice-card": ExerciseCard
+		"exercice-card": ExerciseCard,
+		"go-back": GoBack
 	},
 	created() {
 		this.getExercises()
@@ -44,8 +60,10 @@ export default {
 		async getExercises() {
 			try {
 				let res = await this.$http.get(
-					process.env.VUE_APP_API_URL + "/exercises"
+					process.env.VUE_APP_API_URL + "/exercises",
+					{ params: { group_id: this.$route.params.id } }
 				)
+				this.group = res.data.group
 				this.todo = []
 				this.todoLength = res.data.todo.length
 				for (let index = 0; index < res.data.todo.length; index += 3) {

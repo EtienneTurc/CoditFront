@@ -24,6 +24,26 @@ exports.handle = (ctx, err) => {
 	})
 }
 
+exports.sortExercises = exercises => {
+	const comparator = function (a, b) {
+		if (a.success == b.success) {
+			if (a.difficulty < b.difficulty) {
+				return -1
+			} else {
+				return 1
+			}
+		}
+		return a.success - b.success
+	}
+	return exercises.sort(comparator)
+}
+
+exports.progress = exercises => {
+	let reducer = (accumulator, currentValue) => currentValue.success ? (1 + accumulator) : accumulator;
+	let a = 100 * exercises.reduce(reducer, 0) / exercises.length
+	return a
+}
+
 exports.truncate = (str, linesLimit, sizeLimit) => {
 	let strLineCut = str.split("\n", linesLimit).join("\n")
 	if (strLineCut.length == str.length && str.length < sizeLimit)
@@ -31,11 +51,12 @@ exports.truncate = (str, linesLimit, sizeLimit) => {
 	return strLineCut.slice(0, sizeLimit) + "..."
 }
 
-exports.format = std => {
+exports.format = (std, filename = "") => {
 	std = std.split("\n\n").join("\n")
 	if (!std.split("\n")[0]) {
 		std = std.replace("\n", "")
 	}
+	std = std.split("  ").join("&nbsp;&nbsp;")
 	std = std.split("\n")
 	for (let index = 0; index < std.length; index++) {
 		if (std[index].startsWith("<SUCCESS>")) {
@@ -57,10 +78,11 @@ exports.format = std => {
 			"<i class='v-icon mdi mdi-check theme--light success-color'></i>"
 		)
 	std = std
-		.split("<FAILURE>")
+		.split(/<ERROR>|<FAILURE>/)
 		.join(
 			"<i class='v-icon mdi mdi-close-circle theme--light failure-color'></i>"
 		)
+	std = std.split("File \"<string>\"").join(`File ${filename}`)
 
 	return std
 }

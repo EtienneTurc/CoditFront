@@ -1,8 +1,11 @@
 <template>
 	<v-card @click="navigation" class="mx-auto">
+		<v-btn v-if="exercise.success" x-small absolute dark fab top right color="success">
+			<v-icon>mdi-check</v-icon>
+		</v-btn>
 		<div class="card-title">{{exercise.title}}</div>
 
-		<v-img :src="exercise.banner" height="150"></v-img>
+		<v-img :src="banner" height="150"></v-img>
 		<v-card-actions>
 			<v-row align="center" justify="space-between" class="bottom-bar">
 				<span class="language">{{exercise.language}}</span>
@@ -23,15 +26,17 @@ export default {
 	data() {
 		return {}
 	},
+	computed: {
+		banner() {
+			return utils.getBanner(this.exercise.banner)
+		}
+	},
 	methods: {
 		navigation() {
 			this.$router.push({
 				path: "/exercise/" + this.exercise._id
 			})
 		}
-	},
-	created() {
-		this.exercise.banner = utils.getBanner(this.exercise.banner)
 	}
 }
 </script>

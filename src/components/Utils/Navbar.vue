@@ -1,6 +1,8 @@
 <template>
 	<v-toolbar class="navbar">
-		<v-toolbar-title class="title white--text">Codit</v-toolbar-title>
+		<v-toolbar-title class="white--text">
+			<span class="app-name">Codit</span>
+		</v-toolbar-title>
 
 		<v-spacer></v-spacer>
 
@@ -19,7 +21,7 @@
 			>Nouveau problème</v-btn>
 			<v-btn text class="separate white--text" @click="navigation('/groups')">Groupes</v-btn>
 			<v-btn text class="separate white--text" @click="navigation('/exercises')">Problèmes</v-btn>
-			<v-btn text disabled class="separate" style="color:white !important">
+			<v-btn text disabled class="separate username" style="color:white !important">
 				<v-icon style="color:white !important">mdi-account</v-icon>
 				{{user.firstName}}
 				<br />
@@ -67,15 +69,15 @@ export default {
 </script>
 
 <style lang="scss">
-.title {
-	font-size: 1.5rem !important;
+.app-name {
+	font-size: 2rem !important;
 }
 .navbar {
 	background-color: #0984e3 !important;
 }
-.app-name {
-	font-size: 2rem;
-	color: white;
+
+.username {
+	font-weight: normal !important;
 }
 .header {
 	border-bottom-style: solid;

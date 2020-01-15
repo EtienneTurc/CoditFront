@@ -1,6 +1,7 @@
 <template>
 	<v-container>
 		<h2 v-if="exercise.showTitle">{{exercise.title}}</h2>
+
 		<v-row>
 			<v-col md="6">
 				<v-card class="pa-5">
@@ -45,7 +46,7 @@
 </template>
 
 <script>
-import Loader from "@/components/utils/Loader"
+import Loader from "@/components/Utils/Loader"
 import utils from "@/utils/utils.js"
 import marked from "marked"
 
@@ -96,8 +97,8 @@ export default {
 				}
 			)
 			this.loading = false
-			this.stdout = utils.format(res.data.user_stdout || "")
-			this.stderr = utils.format(res.data.user_stderr || "")
+			this.stdout = utils.format(res.data.user_stdout || "", file.name)
+			this.stderr = utils.format(res.data.user_stderr || "", file.name)
 			this.success = res.data.success
 			if (this.success) this.color = "success-background-color"
 			else this.color = "failure-background-color"

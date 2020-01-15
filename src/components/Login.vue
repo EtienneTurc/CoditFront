@@ -24,7 +24,7 @@ export default {
 		login() {
 			window.location.href =
 				process.env.VUE_APP_API_URL +
-				`/login?next=${process.env.VUE_APP_URL}/exercises`
+				`/login?next=${process.env.VUE_APP_URL}/groups`
 		}
 	}
 }

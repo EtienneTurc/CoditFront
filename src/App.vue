@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import Navbar from "@/components/utils/Navbar"
-import Snackbar from "@/components/utils/Snackbar"
+import Navbar from "@/components/Utils/Navbar"
+import Snackbar from "@/components/Utils/Snackbar"
 
 export default {
 	name: "App",

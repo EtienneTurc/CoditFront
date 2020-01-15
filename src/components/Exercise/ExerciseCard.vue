@@ -1,16 +1,24 @@
 <template>
 	<v-card @click="navigation" class="mx-auto">
+		<v-btn v-if="exercise.success" x-small absolute dark fab top right color="success">
+			<v-icon>mdi-check</v-icon>
+		</v-btn>
 		<v-list-item>
 			<v-list-item-content>
-				<v-list-item-title class="headline">
+				<v-list-item-title class="headline">{{exercise.title}}</v-list-item-title>
+				<v-list-item-subtitle>
 					<div class="flex-between">
-						{{exercise.title}}
-						<div class="stars">
-							<v-icon v-for="(exo,i) in exercise.difficulty" :key="i" style="color:#f1c40f">mdi-star</v-icon>
+						{{exercise.language}}
+						<div>
+							<v-icon
+								v-for="(exo,i) in exercise.difficulty"
+								:key="i"
+								style="color:#f1c40f"
+								size="20"
+							>mdi-star</v-icon>
 						</div>
 					</div>
-				</v-list-item-title>
-				<v-list-item-subtitle>{{exercise.language}}</v-list-item-subtitle>
+				</v-list-item-subtitle>
 			</v-list-item-content>
 		</v-list-item>
 
@@ -49,9 +57,5 @@ export default {
 	color: #f1c40f;
 	vertical-align: middle;
 	font-weight: bold;
-}
-
-.stars {
-	font-size: 0.8rem;
 }
 </style>

@@ -22,43 +22,30 @@
 				</v-row>
 			</v-col>
 		</v-row>
+		<v-progress-linear absolute bottom :value="progress"></v-progress-linear>
 	</v-card>
 </template>
 
 <script>
 import marked from "marked"
 import ExerciseCard from "@/components/Group/GroupExerciseCard.vue"
+import utils from "@/utils/utils"
 
 export default {
 	props: ["group"],
 	data() {
-		return {
-			exercises: [
-				{
-					_id: 1,
-					title: "HelloHelloHelloHelloHelloHello",
-					difficulty: 5,
-					language: "Python3"
-				},
-				{
-					_id: 2,
-					title: "HelloHelloHelloHelloHelloHello",
-					difficulty: 5,
-					language: "Python3"
-				},
-				{
-					_id: 3,
-					title: "HelloHelloHelloHelloHelloHello",
-					difficulty: 5,
-					language: "Python3"
-				}
-			]
-		}
+		return {}
 	},
 	components: {
 		"exercise-card": ExerciseCard
 	},
 	computed: {
+		exercises() {
+			return utils.sortExercises(this.group.exercises).slice(0, 6)
+		},
+		progress() {
+			return utils.progress(this.group.exercises)
+		},
 		html() {
 			let str = this.group.description.split("\n").join("<br>")
 			return str
@@ -83,6 +70,7 @@ export default {
 .description {
 	text-align: justify;
 	font-size: 0.875rem;
+	margin-top: 10px;
 }
 
 .card-expansion {

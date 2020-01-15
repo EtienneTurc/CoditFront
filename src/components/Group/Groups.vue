@@ -52,8 +52,10 @@ export default {
 		async getGroups() {
 			try {
 				let res = await this.$http.get(
-					process.env.VUE_APP_API_URL + "/groups"
+					process.env.VUE_APP_API_URL + "/groups",
+					{ params: { populate: true, withSuccess: true } }
 				)
+				console.log(res.data)
 				res.data = res.data.concat(res.data)
 				res.data = res.data.concat(res.data)
 				res.data = res.data.concat(res.data)

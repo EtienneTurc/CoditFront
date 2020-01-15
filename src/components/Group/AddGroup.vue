@@ -3,13 +3,7 @@
 		<h2>Ajouter un nouveau groupe</h2>
 		<v-form>
 			<v-text-field autofocus v-model="group.title" label="Titre"></v-text-field>
-			<v-textarea
-				auto-grow
-				class="mt-3"
-				v-model="group.description"
-				label="Description (en markdown)"
-				required
-			></v-textarea>
+			<v-textarea auto-grow class="mt-3" v-model="group.description" label="Description" required></v-textarea>
 			<time-picker
 				:init_date="group.startTime"
 				@time="setTime('startTime', $event)"
@@ -31,7 +25,7 @@
 <script>
 import marked from "marked"
 import utils from "@/utils/utils"
-import TimePicker from "@/components/utils/TimePicker"
+import TimePicker from "@/components/Utils/TimePicker"
 
 export default {
 	data: () => {
