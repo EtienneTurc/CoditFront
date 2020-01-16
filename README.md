@@ -28,24 +28,25 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-Codeasy
-Codastic
-Codis
-Codesome
-Codeful
-SkyCode
-CodeRock
-Codex
-StuntCode
-CodeRise
-Codivine
-CodeDivine
-Coderful
-Codit
-RoyalCode
-Codobvious
-SmoothCode
-CodeChill
-Codesnap
-Satiscode
-JustCodeIt
+## Install caddy
+
+```
+curl https://getcaddy.com | bash -s personal hook.service
+```
+
+Then check that the Caddyfile has the following config:
+
+```
+0.0.0.0:8080 {
+        root dist/
+        rewrite / {
+                to {path} /
+        }
+}
+```
+
+To run the server, simply execute:
+
+```
+pm2 start 'caddy' --name caddy
+```
