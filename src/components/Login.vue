@@ -6,7 +6,7 @@
 
 				<h1 class="font-weight-light display-3 white--text">
 					Codit
-					<sup style="font-size:0.4em; top: -1.2em;">1.0</sup>
+					<sup style="font-size:0.4em; top: -1.2em;">0.1</sup>
 				</h1>
 
 				<h2 class="font-italic font-weight-regular white--text mb-5">Just code it !</h2>
