@@ -55,11 +55,6 @@ export default {
 					process.env.VUE_APP_API_URL + "/groups",
 					{ params: { populate: true, withSuccess: true } }
 				)
-				console.log(res.data)
-				res.data = res.data.concat(res.data)
-				res.data = res.data.concat(res.data)
-				res.data = res.data.concat(res.data)
-				res.data = res.data.concat(res.data)
 				this.groups_array = []
 				for (let index = 0; index < res.data.length; index += 3) {
 					this.groups_array.push(res.data.slice(index, index + 3))

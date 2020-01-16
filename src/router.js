@@ -66,4 +66,11 @@ const router = new VueRouter({
 	mode: "history"
 })
 
+router.beforeEach((to, from, next) => {
+	if (to.path == "/") {
+		next("/groups")
+	}
+	next()
+})
+
 export default router;
