@@ -27,7 +27,7 @@
 					<v-card-title>Tester ici votre code !</v-card-title>
 					<v-file-input
 						class="mr-5 ml-5"
-						label="Votre code"
+						placeholder="Fichier"
 						dense
 						ref="file"
 						@change="submitFile"

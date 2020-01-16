@@ -59,7 +59,7 @@ import utils from "@/utils/utils"
 export default {
 	data: () => {
 		return {
-			exercise: { uploaderMail: "etienne.turc@ensta-paris.fr" },
+			exercise: {},
 			languages: ["Python3"],
 			groups: []
 		}

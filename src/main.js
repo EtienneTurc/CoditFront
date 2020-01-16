@@ -25,12 +25,26 @@ axios.interceptors.response.use(function (response) {
 	return Promise.reject(error);
 });
 
+// Markown code highlight
+import marked from "marked"
+import Prism from "prismjs"
+
+marked.setOptions({
+	highlight: function (code, lang) {
+		if (!["py", "python", "javascript"].includes(lang))
+			lang = "markup"
+		return Prism.highlight(code, Prism.languages[lang], lang)
+
+	}
+})
+
 Vue.prototype.$alert = new Vue()
 
-// Vue.config.productionTip = false
+Prism.silent = true
 
 new Vue({
 	router,
 	vuetify,
+	marked,
 	render: h => h(App),
 }).$mount('#app')
