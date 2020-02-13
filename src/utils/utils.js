@@ -70,12 +70,22 @@ exports.format = (std, filename = "") => {
 				std[index]
 				}</span>`
 		}
+		else if (std[index].startsWith("<WARNING>")) {
+			std[index] = `<span class="warning-color">${
+				std[index]
+				}</span>`
+		}
 	}
 	std = std.join("<br>")
 	std = std
 		.split("<SUCCESS>")
 		.join(
 			"<i class='v-icon mdi mdi-check theme--light success-color'></i>"
+		)
+	std = std
+		.split("<WARNING>")
+		.join(
+			"<i class='v-icon mdi mdi-exclamation theme--light warning-color'></i>"
 		)
 	std = std
 		.split(/<ERROR>|<FAILURE>/)

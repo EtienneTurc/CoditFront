@@ -16,14 +16,8 @@
 						label="Groupes"
 					></v-select>
 					<v-select hide-details v-model="exercise.language" :items="languages" label="Langage"></v-select>
-
-					<v-textarea
-						auto-grow
-						class="mt-3"
-						v-model="exercise.markdown"
-						label="Sujet en markdown"
-						required
-					></v-textarea>
+					<v-text-field v-model="exercise.functionName" label="Nom de la fonction (ex: dijkstra)"></v-text-field>
+					<v-textarea auto-grow v-model="exercise.markdown" label="Sujet en markdown" required></v-textarea>
 					<v-text-field
 						type="number"
 						:rules="[v => v>= 1 && v<=5 ]"

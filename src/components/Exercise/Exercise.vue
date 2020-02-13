@@ -103,6 +103,8 @@ export default {
 			if (this.success) this.color = "success-background-color"
 			else this.color = "failure-background-color"
 
+			console.log(this.stdout)
+
 			// Trick to allow the same file to be reupload
 			let text = this.$refs.file.text[0]
 			this.$refs.file.$children[2].$el.click()
@@ -135,6 +137,10 @@ export default {
 
 .success-color {
 	color: #4caf50 !important;
+}
+
+.warning-color {
+	color: #e09900 !important;
 }
 
 .failure-color {
