@@ -2,7 +2,7 @@
 	<v-container align-content-center class="s-bg is-fullheight">
 		<v-layout align-center justify-center row fill-height>
 			<div class="text-md-center">
-				<!-- <v-img class="my-3" contain height="200px"></v-img> -->
+				<v-img src="../assets/logo.png" class="logo my-3" contain height="200px"></v-img>
 
 				<h1 class="font-weight-light display-3 white--text">
 					Codit
@@ -46,5 +46,80 @@ export default {
 
 html {
 	height: 100%;
+}
+
+.logo {
+	-webkit-animation: jackIntheBox 1s forwards, flash ease-out 4s infinite;
+	-moz-animation: jackIntheBox 1s forwards, flash ease-out 4s infinite;
+	animation: jackIntheBox 1s forwards, flash ease-out 4s infinite;
+}
+
+/* .logo {
+	-webkit-animation: jackIntheBox 1s;
+	-moz-animation: jackIntheBox 1s;
+	animation: jackIntheBox 1s;
+} */
+
+@keyframes jackIntheBox {
+	from {
+		transform: scale(0.5) rotate(8deg);
+		transform-origin: center bottom;
+	}
+
+	35% {
+		transform: rotate(-4deg);
+	}
+
+	70% {
+		transform: rotate(2deg);
+	}
+}
+
+@-webkit-keyframes flash {
+	from {
+		opacity: 1;
+	}
+	20% {
+		opacity: 1;
+	}
+	24% {
+		opacity: 0.4;
+	}
+	26% {
+		opacity: 0.8;
+	}
+	28% {
+		opacity: 0.1;
+	}
+	30% {
+		opacity: 1;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes flash {
+	from {
+		opacity: 1;
+	}
+	20% {
+		opacity: 1;
+	}
+	24% {
+		opacity: 0.4;
+	}
+	26% {
+		opacity: 0.8;
+	}
+	28% {
+		opacity: 0;
+	}
+	30% {
+		opacity: 1;
+	}
+	to {
+		opacity: 1;
+	}
 }
 </style>
