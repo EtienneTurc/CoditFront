@@ -24,7 +24,10 @@
 					>
 						<v-icon>mdi-check</v-icon>
 					</v-btn>
-					<v-card-title>Tester ici votre code !</v-card-title>
+					<span class="flex-title">
+						<v-card-title>Tester ici votre code !</v-card-title>
+						<p class="v-center language">{{exercise.language}}</p>
+					</span>
 					<v-file-input
 						class="mr-5 ml-5"
 						placeholder="Fichier"
@@ -145,5 +148,17 @@ export default {
 
 .failure-color {
 	color: rgba(246, 80, 81) !important;
+}
+
+.flex-title {
+	display: flex;
+	justify-content: space-between;
+}
+
+.language {
+	margin-top: auto;
+	margin-right: 5%;
+	margin-bottom: 0px !important;
+	color: rgba(0, 0, 0, 0.6);
 }
 </style>
