@@ -12,7 +12,7 @@
 		"babel-plugin-prismjs": "^2.0.0",
 		"core-js": "^3.4.3",
 		"marked": "^0.8.0",
-		"prismjs": "^1.19.0",
+		"prismjs": "^1.23.0",
 		"vue": "^2.6.10",
 		"vue-axios": "^2.1.5",
 		"vue-router": "^3.1.3",
